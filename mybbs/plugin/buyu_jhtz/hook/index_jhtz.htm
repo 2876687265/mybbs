@@ -1,0 +1,48 @@
+<?php
+$list = db_find('thread', array('fid'=>4), array('top'=>-1),1,50);
+
+?>
+	<style>
+		td.center {
+		    text-align: center;
+		}
+	</style>
+
+	<!--精华帖子 上方广告-->
+	<div class="box">
+		<div class="adbox">
+			<table width="100%" cellspacing="0" cellpadding="0" data-sort="sortDisabled" id="table3">
+				<tbody>
+					<tr>
+						<td bgcolor="#FFFFFF" style="margin: 0px; padding: 3px 2px; border-color: rgb(209, 209, 209); word-break: break-all;">
+							<a target="_blank" href="http://119.42.149.156/8903.html">
+								<img border="0" src="http://345003.com/img/js6.gif" width="100%" height="150">
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="mb-3"></div>
+
+
+	<!--精华帖子-->
+	<div class="box">
+		<div class="title"><span style="padding-left: 10px;font-size: 20px;"><font color="#FF0000" face="微软雅黑" size="2">精华帖子</font></span></div>
+		<table border="1" width="100%" cellpadding="0" height="100" cellspacing="0" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF" bgcolor="#FFFFFF">
+			<tbody>
+				<?php foreach($list as $vol){ ?>
+					<tr>
+						<td class="center f13 black l150">
+							<a target="_blank" href="<?php echo url("thread-$vol[tid]");?>" style="text-decoration: none">
+								<span style="font-size: 12pt; "><?php echo $vol['subject']; ?></span>
+							</a>
+						</td>
+					</tr>
+				<?php }?>
+			</tbody>
+		</table>
+	</div>
+	<div class="mb-3"></div>
+

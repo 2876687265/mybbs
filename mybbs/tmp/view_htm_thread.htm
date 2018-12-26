@@ -1,0 +1,1112 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+
+<?php
+
+if (isset($haya_post_like_config['like_is_delete'])
+	&& $haya_post_like_config['like_is_delete'] == 1
+) {
+	$haya_post_like_is_delete = true;
+} else {
+	$haya_post_like_is_delete = false;
+}
+
+?>
+
+<div class="row">
+	<div class="col-lg-9 main">
+
+		<?php
+
+	$slidelist = db_find('slide', array('weizhi'=>4), array('rank'=>-1), 1, 1000, 'slideid');
+
+?>
+	<!--内部正版-->
+	<div class="box">
+		
+		<style type="text/css">
+			.style3 {
+				color: #000000;
+				background-color: #00FFFF;
+			}
+			.style4 {
+				font-weight: bold;
+				color: #333333;
+				font-size: medium;
+				font-family: 微软雅黑;
+				background-color: #00FF00;
+			}
+			* { word-wrap: break-word; }
+			*{padding:0;margin:0}
+			* { word-wrap: break-word; }
+			
+			* {
+				PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+			}
+			* {
+				WORD-WRAP: break-word
+			}
+			* {
+				WORD-WRAP: break-word
+			}
+			* {
+				WORD-WRAP: break-word
+			}
+			* {
+				WORD-WRAP: break-word
+			}
+			table td {
+			    border: 1px solid #e5e5e5;
+			    padding: 3px 2px;
+			    word-break: break-all;
+			}
+			.box {
+			    margin-bottom: 0.2rem;
+			    margin-top: -0.6rem;
+			    background: #f8f9fa;
+			    box-shadow: 2px 2px 3px rgba(173, 181, 189, 0.25);
+			}
+		</style>
+		
+		<table border="0" width="100%" height="121" cellspacing="0" cellpadding="0">
+			<tbody>
+				<?php foreach ($slidelist as $key => $link) { ?>
+					<td align="center" bgcolor="#FF0000" height="29">
+						<a href="<?php echo $link['url'];?>" title="<?php echo $link['name'];?>">
+						<img class="d-block w-100 rounded" src="<?php echo $link['picurl'];?>" alt="<?php echo $link['name'];?>" height="<?php echo $link['picheight'];?>">
+						</a>
+					</td>
+				<?php } ?>		
+			</tbody>
+		</table>
+
+	</div>
+	<div class="mb-3"></div>	
+
+
+	<!--开奖结果-->
+	<div class="box" style="margin-bottom: 1rem;    padding: 5px;">
+		<iframe src="http://kj4949.com/bm/kj49.html" frameborder="0" style="width:100%;height:148px" target="_blank" scrolling="no" name="I1"></iframe>
+	</div>
+	<div class="mb-3"></div>
+
+
+
+		
+		
+		
+		<?php if(empty($hide_breadcrumb)) { ?>
+		<!-- <ol class="breadcrumb d-none d-md-flex">
+			<li class="breadcrumb-item"><a href="./" aria-label="<?php echo lang('index_page');?>"><i class="icon-home"></i></a></li>
+			<li class="breadcrumb-item"><a href="<?php echo url("forum-$fid");?>"><?php echo $forum['name'];?></a></li>
+			<li class="breadcrumb-item active"><a href="<?php echo url("thread-$tid");?>" title="<?php echo lang('index_page');?>返回主题第一页"><?php echo $thread['subject'];?></a></li>
+			
+		</ol> -->
+		<?php } ?>
+		
+		
+		<div class="card card-thread">
+			<div class="card-body">
+				<div class="media">
+					<a href="<?php echo url("user-$thread[uid]");?>" tabindex="-1">
+						<img class="avatar-3 mr-3" src="<?php echo $thread['user_avatar_url'];?>">
+					</a>
+					<div class="media-body">
+						
+						<h4 class="break-all">
+							<?php 
+if($thread['highlight'] == '1' || $thread['highlight'] == '2' || $thread['highlight'] == '3' || $thread['highlight'] == '4' || $thread['highlight'] == '5') {
+$sg_highlight = kv_get('sg_highlight');
+switch ($thread['highlight']) {
+case '1': 	$color = $sg_highlight['highlight2']; 	break;
+case '2': 	$color = $sg_highlight['highlight4']; 	break;
+case '3': 	$color = $sg_highlight['highlight6']; 	break;
+case '4': 	$color = $sg_highlight['highlight8']; 	break;
+case '5': 	$color = $sg_highlight['highlight10']; 	break;
+}
+$thread['subject']="<span style=color:$color;>$thread[subject]</span>";
+}?>
+							<?php echo $thread['subject'];?>
+							
+						</h4>
+						
+						<div class="d-flex justify-content-between small">
+							<div>
+								<span style="padding-bottom:0;margin-bottom:0;color:<?php echo setting_get('huoyanju_vip_name_3_htm');?>; ">		<i class="iconfont icon-<?php echo 'v' .$thread['user']['gid'] ;?>" style="font-size:<?php echo setting_get('huoyanju_vip_name_4_htm');?> ;"> <?php echo $thread['user']['groupname'];?> </i>	</span>
+								<span class="username">
+									<a href="<?php echo url("user-$thread[uid]");?>" class="text-muted font-weight-bold"><?php echo $thread['username'];?></a>
+								</span>
+								<span class="date text-grey ml-2"><?php echo $thread['create_date_fmt'];?></span>
+								<span class="text-grey ml-2"><i class="icon-eye"></i> <?php echo $thread['views'];?></span>
+								<?php
+//判断百度收录
+	function baidu($url){
+		$url='http://www.baidu.com/s?wd='.$url;
+		$curl=curl_init();
+		curl_setopt($curl,CURLOPT_URL,$url);
+		curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+		$rs=curl_exec($curl);
+		curl_close($curl);
+		if(!strpos($rs,'没有找到')){
+			return 1;
+		}else{
+			return 0;
+		}}
+	function baidustatus(){
+		$tid=$GLOBALS['tid'];
+		$url=http_url_path()."thread-$tid.htm";
+		if(baidu($url)==1){
+			echo "<a style=\"color:green;\" rel=\"external nofollow\" title=\"点击查看\" target=\"_blank\" href=\"https://www.baidu.com/s?wd=$url\">[百度已收录]</a>";
+		}else{
+			echo "<a style=\"color:red;\" rel=\"external nofollow\" title=\"点击提交收录！\" target=\"_blank\" href=\"https://ziyuan.baidu.com/linksubmit/url?sitename=$url\">[百度未收录]</a>";
+			//主动推送代码
+			$api = 'http://data.zz.baidu.com/urls?site=www.ccreed.cn&token=ZM67Uj7Gj2mMggJY';
+			}
+		}
+
+//判断360收录
+	function haoso($url){
+		$url='https://www.so.com/s?a=index&q='.$url;
+		$curl=curl_init();curl_setopt($curl,CURLOPT_URL,$url);curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);$rs=curl_exec($curl);curl_close($curl);
+		if(!strpos($rs,'找不到')){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+ 
+	function logurlhaoso(){
+		$tid=$GLOBALS['tid'];
+		$url=http_url_path()."thread-$tid.htm";
+		if(haoso($url)==1){
+			echo "<a style=\"color:#1EA83A;\" rel=\"external nofollow\" title=\"点击查看！\" target=\"_blank\" href=\"https://www.so.com/s?a=index&q=$url\">[360已收录]</a>";
+		}else{
+			echo "<a style=\"color:red;\" rel=\"external nofollow\" title=\"点击提交收录！\" target=\"_blank\" href=\"http://info.so.com/site_submit.html\">[360未收录]</a>";
+		}
+	}
+//判断搜狗收录
+	function sogou($url){
+		$url='https://www.sogou.com/sie?query='.$url;
+		$curl=curl_init();curl_setopt($curl,CURLOPT_URL,$url);curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);$rs=curl_exec($curl);curl_close($curl);
+		if(!strpos($rs,'未收录？')){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+ 
+	function logurlsogou(){
+		$tid=$GLOBALS['tid'];
+		$url=http_url_path()."thread-$tid.htm";
+		if(sogou($url)==1){
+			echo "<a style=\"color:#1EA83A;\" rel=\"external nofollow\" title=\"点击查看！\" target=\"_blank\" href=\"https://www.sogou.com/sie?query=$url\">[搜狗已收录]</a>";
+		}else{
+			echo "<a style=\"color:red;\" rel=\"external nofollow\" title=\"点击提交收录！\" target=\"_blank\" href=\"http://fankui.help.sogou.com/index.php/web/web/index/type/1?v=1&urlword=$url\">[搜狗未收录]</a>";
+		}
+	}
+
+?>
+<span class="text-grey ml-2"><img src="plugin/ccreed_seo_status/images/bdfavicon.png"/><?php baidustatus(); ?></span>
+<span class="text-grey ml-2"><img src="plugin/ccreed_seo_status/images/sogoufavicon.png"/><?php logurlsogou(); ?></span>
+<span class="text-grey ml-2"><img src="plugin/ccreed_seo_status/images/360favicon.png"/><?php logurlhaoso(); ?></span>
+
+
+
+
+
+
+
+
+
+
+							</div>
+							<div>
+								<?php
+	
+if (isset($haya_post_like_config['thread_like_position'])
+	&& $haya_post_like_config['thread_like_position'] == 1
+) {
+
+	if (isset($haya_post_like_config['open_thread'])
+		&& $haya_post_like_config['open_thread'] == 1
+	) {
+	?>
+		<?php $haya_post_like_thread_check = haya_post_like_find_by_uid_and_pid($uid, $first['pid']); ?>
+
+		<?php 
+		if(($allowupdate || $first['allowupdate']) 
+			|| ($allowdelete || $first['allowdelete'])
+		) {
+			$haya_post_like_mr = "mr-3";
+		} else {
+			$haya_post_like_mr = "";
+		}
+		?>
+		
+		<span class="haya-thread-like <?php echo $haya_post_like_mr; ?>">
+			<?php if (!empty($uid)) { ?>
+				<?php if($haya_post_like_thread_check){ ?>
+					<a href="javascript:;" class="text-grey js-haya-post-like-thread-del" data-pid="<?php echo $first['pid'];?>" title="<?php echo $haya_post_like_is_delete ? lang('haya_post_like_unlike') : lang('haya_post_like_has_like'); ?>">
+						<i class="icon icon-thumbs-up" aria-label="<?php echo $haya_post_like_is_delete ? lang('haya_post_like_unlike') : lang('haya_post_like_has_like'); ?>"></i>
+						<span class="haya-post-like-thread-user-count"><?php echo intval($first['likes']); ?></span>
+					</a>
+				<?php } else { ?>
+					<a href="javascript:;" class="text-grey js-haya-post-like-thread-add" data-pid="<?php echo $first['pid'];?>" title="点赞本帖">
+						<i class="icon icon-thumbs-o-up" aria-label="<?php echo lang('haya_post_like_like_thread'); ?>"></i>
+						<span class="haya-post-like-thread-user-count"><?php echo intval($first['likes']); ?></span>
+					</a>
+				<?php } ?>	
+			<?php } else { ?>
+				<a href="javascript:;" class="text-grey js-haya-post-like-thread-tip" data-pid="<?php echo $first['pid'];?>" title="点赞本帖">
+					<i class="icon icon-thumbs-o-up" aria-label="<?php echo lang('haya_post_like_like_thread'); ?>"></i>
+					<span class="haya-post-like-thread-user-count"><?php echo intval($first['likes']); ?></span>
+				</a>
+			<?php } ?>
+		</span>
+	<?php } ?>
+
+<?php } ?>
+
+								<?php if($allowupdate || $first['allowupdate']) { ?>
+								<a href="<?php echo url("post-update-$thread[firstpid]");?>" class="text-grey mr-2 post_update"><i class="icon-edit"></i> <?php echo lang('edit');?></a>
+								<?php } ?>
+								
+								<?php if($allowdelete || $first['allowdelete']) { ?>
+								<a data-href="<?php echo url("post-delete-$thread[firstpid]");?>" href="javascript:void(0);" class="text-grey post_delete" isfirst="1"><i class="icon-remove"></i> <?php echo lang('delete');?></a>
+								<?php } ?>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="message break-all" isfirst="1">
+				<?php if($page == 1) { ?>
+				
+					
+					<?php echo $first['message_fmt'];?>
+					
+					
+					<?php echo post_file_list_html($first['filelist']);?>
+					
+					
+				<?php } else { ?>
+				
+					
+					<p><a href="<?php echo url("thread-$tid");?>"><?php echo lang('view_thread_message');?></a></p>
+					
+					
+				<?php } ?>
+				</div>
+
+				
+				<div class="plugin d-flex justify-content-center mt-3">
+					<?php
+	
+if (isset($haya_post_like_config['thread_like_position'])
+	&& $haya_post_like_config['thread_like_position'] == 2
+) {
+
+	if (isset($haya_post_like_config['open_thread'])
+		&& $haya_post_like_config['open_thread'] == 1
+	) {
+	?>
+		<?php $haya_post_like_thread_check = haya_post_like_find_by_uid_and_pid($uid, $first['pid']); ?>
+
+		<div class="haya-post-like px-2">
+			<span class="btn-group" role="group">
+				<?php if (!empty($uid)) { ?>
+					<?php if($haya_post_like_thread_check){ ?>
+						<button class="btn btn-outline-secondary js-haya-post-like-thread-del" data-pid="<?php echo $first['pid'];?>" title="<?php echo $haya_post_like_is_delete ? lang('haya_post_like_unlike') : lang('haya_post_like_has_like'); ?>">
+							<i class="icon icon-thumbs-up" aria-label="<?php echo $haya_post_like_is_delete ? lang('haya_post_like_unlike') : lang('haya_post_like_has_like'); ?>"></i>
+							<span class="haya-post-like-thread-btn"><?php echo lang('haya_post_like_has_like'); ?></span>
+						</button>
+					<?php } else { ?>
+						<button class="btn btn-outline-secondary js-haya-post-like-thread-add" data-pid="<?php echo $first['pid'];?>" title="点赞本帖">
+							<i class="icon icon-thumbs-o-up" aria-label="<?php echo lang('haya_post_like_like_thread'); ?>"></i>
+							<span class="haya-post-like-thread-btn"><?php echo lang('haya_post_like_like'); ?></span>
+						</button>
+					<?php } ?>	
+				<?php } else { ?>
+					<button class="btn btn-outline-secondary js-haya-post-like-thread-tip" data-pid="<?php echo $first['pid'];?>" title="点赞本帖">
+						<i class="icon icon-thumbs-o-up" aria-label="<?php echo lang('haya_post_like_like_thread'); ?>"></i>
+						<span class="haya-post-like-thread-btn"><?php echo lang('haya_post_like_like'); ?></span>
+					</button>
+				<?php } ?>
+
+				<button class="btn btn-outline-secondary" title="<?php echo lang('haya_post_like_like_count'); ?>" data-tid="<?php echo $tid;?>">
+					<span class="haya-post-like-thread-user-count"><?php echo intval($first['likes']); ?></span>
+				</button>
+			</span>
+		</div>
+	<?php } ?>
+
+<?php } ?>
+<?php $haya_favorite_check_favorite = haya_favorite_find_by_uid_and_tid($uid, $tid); ?>
+
+<style>
+.haya-favoriter {
+	position: relative;
+}
+.haya-favorite-show-users {
+	position: absolute;
+	top: 5px;
+	z-index: 100;
+	width: 100%;
+}
+.haya-favorite-show-users .haya-favorite-users {
+	max-height: 250px;
+	overflow-y: auto;
+}
+</style>
+
+<div class="haya-favoriter px-2">
+	<span class="btn-group haya-favoriter-info" role="group">
+		<?php if (!empty($uid)) { ?>
+			<?php if($haya_favorite_check_favorite){ ?>
+				<button class="btn btn-outline-secondary js-haya-favorite-del" data-tid="<?php echo $tid;?>" title="<?php echo lang('haya_favorite_delete_favorite'); ?>">
+					<i class="icon icon-star" aria-label="<?php echo lang('haya_favorite_delete_favorite'); ?>"></i>
+					<span class="haya-favorite-btn"><?php echo lang('haya_favorite_delete'); ?></span>
+				</button>
+			<?php } else { ?>
+				<button class="btn btn-outline-secondary js-haya-favorite-add" data-tid="<?php echo $tid;?>" title="<?php echo lang('haya_favorite_add_favorite'); ?>">
+					<i class="icon icon-star-o" aria-label="<?php echo lang('haya_favorite_add_favorite'); ?>"></i>
+					<span class="haya-favorite-btn"><?php echo lang('haya_favorite_add'); ?></span>
+				</button>
+			<?php } ?>	
+		<?php } else { ?>
+			<button class="btn btn-outline-secondary js-haya-favorite-tip" data-tid="<?php echo $tid;?>" title="<?php echo lang('haya_favorite_add_favorite'); ?>">
+				<i class="icon icon-star-o" aria-label="<?php echo lang('haya_favorite_add_favorite'); ?>"></i>
+				<span class="haya-favorite-btn"><?php echo lang('haya_favorite_add'); ?></span>
+			</button>
+		<?php } ?>
+
+		<button class="btn btn-outline-secondary js-haya-favorite-show-users" data-tid="<?php echo $tid;?>" title="<?php echo lang('haya_favorite_show_favorite_users'); ?>">
+			<span class="haya-favorite-user-count"><?php echo intval($thread['favorites']); ?></span>
+		</button>
+	</span>
+</div>
+
+
+				</div>
+				<div class="haya-favoriter">
+	<div class="text-center d-none haya-favorite-show-users">
+		<div class="text-left m-0 p-0 col-md-6 mx-auto">
+			<div class="modal-content">
+				<div class="modal-header small">
+					<b><?php echo lang('haya_favorite_users'); ?>（<span class="haya-favorite-user-count"><?php echo intval($thread['favorites']); ?></span>）</b>
+					
+					<span class="close small p-3 haya-favorite-close js-haya-favorite-show-users" data-dismiss="dodal">X</span>
+				</div>
+			
+				<div class="modal-body p-3">
+					<div class="text-muted haya-favorite-users small break-all">
+						<div class="text-muted"><?php echo lang('haya_favorite_loading'); ?></div>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</div>
+</div>
+
+			</div>
+		</div>
+		
+		<?php
+if ((isset($haya_post_like_config['open_post'])
+	&& $haya_post_like_config['open_post'] == 1)
+	&& (isset($haya_post_like_config['open_hot_like'])
+	&& $haya_post_like_config['open_hot_like'] == 1)
+) {
+?>
+
+	<?php if (!empty($haya_post_like_hot_posts) && $page == 1) { ?>
+	<div class="card">
+		<div class="card-body">
+			<div class="card-title">
+				<div class="d-flex justify-content-between">
+					<div>
+						<b><?php echo lang('haya_post_like_hot_post'); ?></b>
+					</div>
+					<div></div>
+				</div>
+			</div>
+			<ul class="list-unstyled postlist m-0">
+				<?php 
+				$haya_post_like_old_postlist = $postlist; 
+				$postlist = $haya_post_like_hot_posts;
+				?>
+				
+				<?php include _include(APP_PATH.'view/htm/post_list.inc.htm'); ?>
+				
+				<?php $postlist = $haya_post_like_old_postlist; ?>
+			</ul>
+		</div>
+	</div>
+	
+	<?php } ?>
+
+<?php } ?>
+		
+		<div class="card card-postlist">
+			<div class="card-body">
+				<div class="card-title">
+					<div class="d-flex justify-content-between">
+						<div>
+							<b><?php echo lang('new_post');?></b> (<span class="posts"><?php echo $thread['posts'];?></span>)
+						</div>
+						
+						<div>
+							
+						</div>
+					</div>
+				</div>
+				<ul class="list-unstyled postlist">
+					<?php include _include(APP_PATH.'view/htm/post_list.inc.htm'); ?>
+					
+					<?php if(!empty($user)) { ?>
+					<li class="post newpost media">
+						<a href="<?php echo url("user-$user[uid]");?>" class="mr-3" tabindex="-1">
+							<img class="avatar-3" src="<?php echo $user['avatar_url'];?>">
+						</a>
+						<div class="media-body">
+							<div class="d-flex justify-content-between small text-muted">
+								<div>
+									<div><?php echo $user['username'];?></div>
+								</div>
+								<div>
+									<span class="floor" id="newfloor"><?php echo ($thread['posts'] + 2);?></span><?php echo lang('floor');?>
+								</div>
+							</div>
+							<div>
+								<form action="<?php echo url("post-create-$tid-1");?>" method="post" id="quick_reply_form" class="d-block">	
+									<input type="hidden" name="doctype" value="1" />
+									<input type="hidden" name="return_html" value="1" />
+									<input type="hidden" name="quotepid" value="0" />
+									
+									<div class="message mt-1">
+										<textarea class="form-control" placeholder="<?php echo lang('message');?>" name="message" id="message"></textarea>
+									</div>
+									
+									<div class="text-muted mt-2 small">
+										<div class="d-flex justify-content-between">
+											<div>
+												
+												<button type="submit" class="btn btn-sm btn-secondary" id="submit" data-loading-text="<?php echo lang('submiting');?>..."> <?php echo lang('post_create');?> </button>
+												
+											</div>
+											<div>
+												
+												<a class="icon-mail-forward text-muted" href="<?php echo url("post-create-$tid");?>" id="advanced_reply"> <?php echo lang('advanced_reply');?></a>
+												
+											</div>
+										</div>
+									</div>
+									
+								</form>
+							</div>
+						</div>
+					</li>
+					<?php } ?>
+							
+				</ul>
+			</div>
+		</div>
+		
+		
+		<div class="d-none threadlist"><input type="checkbox" name="modtid" value="<?php echo $thread['tid']; ?>" checked /></div>
+		<?php include _include(APP_PATH.'view/htm/thread_list_mod.inc.htm');?>
+		
+		<?php if($pagination) { ?>
+		<nav><ul class="pagination my-4 justify-content-center flex-wrap"><?php echo $pagination; ?></ul></nav>
+		<?php }?>
+		
+		
+		
+		<a role="button" class="btn btn-secondary btn-block xn-back col-lg-6 mx-auto mb-3" href="javascript:history.back();"><?php echo lang('back');?></a>
+		<?php
+$list = db_find('thread', array('fid'=>4), array('top'=>-1),1,50);
+
+?>
+	<style>
+		td.center {
+		    text-align: center;
+		}
+	</style>
+
+	<!--精华帖子 上方广告-->
+	<div class="box">
+		<div class="adbox">
+			<table width="100%" cellspacing="0" cellpadding="0" data-sort="sortDisabled" id="table3">
+				<tbody>
+					<tr>
+						<td bgcolor="#FFFFFF" style="margin: 0px; padding: 3px 2px; border-color: rgb(209, 209, 209); word-break: break-all;">
+							<a target="_blank" href="http://119.42.149.156/8903.html">
+								<img border="0" src="http://345003.com/img/js6.gif" width="100%" height="150">
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="mb-3"></div>
+
+
+	<!--精华帖子-->
+	<div class="box">
+		<div class="title"><span style="padding-left: 10px;font-size: 20px;"><font color="#FF0000" face="微软雅黑" size="2">精华帖子</font></span></div>
+		<table border="1" width="100%" cellpadding="0" height="100" cellspacing="0" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF" bgcolor="#FFFFFF">
+			<tbody>
+				<?php foreach($list as $vol){ ?>
+					<tr>
+						<td class="center f13 black l150">
+							<a target="_blank" href="<?php echo url("thread-$vol[tid]");?>" style="text-decoration: none">
+								<span style="font-size: 12pt; "><?php echo $vol['subject']; ?></span>
+							</a>
+						</td>
+					</tr>
+				<?php }?>
+			</tbody>
+		</table>
+	</div>
+	<div class="mb-3"></div>
+
+
+		<?php
+$list = db_find('thread', array('fid'=>2), array('top'=>-1),1,50);
+
+?>
+	
+
+	<!--帖子专区 1 上方广告-->
+	
+	<?php
+$slidelist = db_find('slide', array('weizhi'=>2), array('rank'=>-1), 1, 1000, 'slideid');
+?>
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+	<div class="box">
+		<div class="adbox">
+			<table width="100%" cellspacing="0" cellpadding="0" data-sort="sortDisabled" id="table3">
+				<tbody>
+					<?php if(!empty($slidelist)){ ?>
+						<?php foreach($slidelist as $key=>$val){ ?>
+							<tr>
+								<td bgcolor="#FFFFFF" style="margin: 0px; padding: 3px 2px; border-color: rgb(209, 209, 209); word-break: break-all;">
+									<a <?php if(empty($val['url'])){ ?> target="_blank" href="<?php echo $val['url'] ?>" <?php } ?> >
+										<img border="0" src="<?php echo $val['picurl'] ?>" width="100%" height="<?php echo $val['picheight'] ?>">
+									</a>
+								</td>
+							</tr>
+						<?php  }?>
+					<?php  }?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="mb-3"></div>
+
+	<div class="mb-3"></div>
+
+
+	<!--帖子专区 1-->
+	<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+		<table border="0" cellspacing="0" cellpadding="0" width="100%" style="margin: 0; padding: 0; word-wrap:break-word;table-layout:fixed;">
+			<tbody style="margin: 0; padding: 0; word-wrap:break-word"><!--每期结束--><!--每期开始-->
+				<tr>
+					<td bgcolor="#FFFFFF" style="margin: 0px; padding: 3px 2px; border-color: rgb(209, 209, 209); word-break: break-all;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+						<img src="http://www.345003.com/tu/tiezi.png" width="100%" height="50">
+					</td>
+				</tr>
+
+				<?php foreach($list as $vol){ ?>
+					<tr>
+						<td bgcolor="#FFFFFF" style="margin: 0px; padding: 3px 2px; border-color: rgb(209, 209, 209); word-break: break-all;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+							<div style="PADDING-BOTTOM: 1px; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,51,0); TEXT-INDENT: 0px; MARGIN: 0px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; FONT: 14px/22px tahoma, 微软雅黑, 宋体, arial, georgia, verdana, helvetica, sans-serif; WORD-WRAP: break-word; WHITE-SPACE: nowrap; FLOAT: left; LETTER-SPACING: normal; COLOR: rgb(255,255,255); WORD-SPACING: 0px; PADDING-TOP: 1px; border-radius: 5px; -webkit-text-stroke-width: 0px" class="txt">
+								<span style="font-size: 11pt">高手贴</span>
+							</div>
+							<font face="微软雅黑">
+								<a target="_blank" href="<?php echo url("thread-$vol[tid]");?>" style="text-decoration: none">
+									<font color="#000000" style="font-size: 11pt"><?php echo $vol['subject']; ?></font>
+								</a>
+							</font>
+						</td>
+					</tr>
+				<?php } ?>		
+
+			</tbody>
+		</table>
+	</div>
+	<div class="mb-3"></div>
+
+
+		<?php
+$list = db_find('thread', array('fid'=>2), array('top'=>-1),1,50);
+
+?>
+	
+
+	<!--帖子专区 2上方广告-->
+	<?php
+$slidelist = db_find('slide', array('weizhi'=>3), array('rank'=>-1), 1, 1000, 'slideid');
+?>
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+	<div class="box">
+		<div class="adbox">
+			<table width="100%" cellspacing="0" cellpadding="0" data-sort="sortDisabled" id="table3">
+				<tbody>
+					<?php if(!empty($slidelist)){ ?>
+						<?php foreach($slidelist as $key=>$val){ ?>
+							<tr>
+								<td bgcolor="#FFFFFF" style="margin: 0px; padding: 3px 2px; border-color: rgb(209, 209, 209); word-break: break-all;">
+									<a <?php if(empty($val['url'])){ ?> target="_blank" href="<?php echo $val['url'] ?>" <?php } ?> >
+										<img border="0" src="<?php echo $val['picurl'] ?>" width="100%" height="<?php echo $val['picheight'] ?>">
+									</a>
+								</td>
+							</tr>
+						<?php  }?>
+					<?php  }?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="mb-3"></div>
+	<div class="mb-3"></div>
+
+
+	<!--帖子专区 2-->
+	<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+		<table border="0" cellspacing="0" cellpadding="0" width="100%" style="margin: 0; padding: 0; word-wrap:break-word;table-layout:fixed;">
+			<tbody style="margin: 0; padding: 0; word-wrap:break-word"><!--每期结束--><!--每期开始-->
+				<tr>
+					<td bgcolor="#FFFFFF" style="margin: 0px; padding: 3px 2px; border-color: rgb(209, 209, 209); word-break: break-all;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+						<img src="http://345003.com/img/jy.png" width="100%" height="50">
+					</td>
+				</tr>
+
+				<?php foreach($list as $vol){ ?>
+					<tr>
+						<td bgcolor="#FFFFFF" style="margin: 0px; padding: 3px 2px; border-color: rgb(209, 209, 209); word-break: break-all;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+							<div style="PADDING-BOTTOM: 1px; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,51,0); TEXT-INDENT: 0px; MARGIN: 0px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; FONT: 14px/22px tahoma, 微软雅黑, 宋体, arial, georgia, verdana, helvetica, sans-serif; WORD-WRAP: break-word; WHITE-SPACE: nowrap; FLOAT: left; LETTER-SPACING: normal; COLOR: rgb(255,255,255); WORD-SPACING: 0px; PADDING-TOP: 1px; border-radius: 5px; -webkit-text-stroke-width: 0px" class="txt">
+								<span style="font-size: 11pt">高手贴</span>
+							</div>
+							<font face="微软雅黑">
+								<a target="_blank" href="<?php echo url("thread-$vol[tid]");?>" style="text-decoration: none">
+									<font color="#000000" style="font-size: 11pt"><?php echo $vol['subject']; ?></font>
+								</a>
+							</font>
+						</td>
+					</tr>
+				<?php } ?>		
+
+			</tbody>
+		</table>
+	</div>
+	<div class="mb-3"></div>
+
+
+
+	</div>
+	<div class="col-lg-3 d-none d-lg-block aside">
+	
+		<a role="button" class="btn btn-primary btn-block mb-3" href="<?php echo url('thread-create-'.$fid);?>"><?php echo lang('thread_create_new');?></a>
+		
+		<div class="card card-user-info">
+			<div class="m-3 text-center">
+				<a href="<?php echo url("user-$thread[uid]");?>" tabindex="-1">
+					<img class="avatar-5" src="<?php echo $thread['user_avatar_url'];?>">
+				</a>
+				<h5><a href="<?php echo url("user-".$thread['user']['uid']);?>"><?php echo $thread['user']['username'];?></a></h5>
+				
+			</div>
+			<div class="card-footer p-2">
+				<table class="w-100 small">
+					<tr align="center">
+						<td>
+							<span class="text-muted"><?php echo lang('threads');?></span><br>
+							<b><?php echo $thread['user']['threads'];?></b>
+						</td>
+						
+						<td>
+							<span class="text-muted"><?php echo lang('posts');?></span><br>
+							<b><?php echo $thread['user']['posts'];?></b>
+						</td>
+						
+						<td>
+							<span class="text-muted"><?php echo lang('create_rank');?></span><br>
+							<b><?php echo $thread['user']['uid'];?></b>
+						</td>
+						
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		<div class="form-group">
+	<form action="<?php echo url('search');?>" id="search_form">
+		<div class="input-group mb-3">
+			<input type="text" class="form-control" placeholder="<?php echo lang('keyword');?>" name="keyword">
+			<div class="input-group-append">
+				<button class="btn btn-primary" type="submit"><?php echo lang('search');?></button>
+			</div>
+		</div>
+	</form>
+</div>
+
+		
+		
+		
+	</div>
+
+
+</div>
+
+
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+
+<script>
+var jform = $('#quick_reply_form');
+var jsubmit = $('#submit');
+jform.on('submit', function() {
+	jform.reset();
+	jsubmit.button('loading');
+	var postdata = jform.serialize();
+	$.xpost(jform.attr('action'), postdata, function(code, message) {
+		if(code == 0) {
+			var s = '<ul>'+message+'</ul>';
+			var jli = $(s).find('li');
+			jli.insertBefore($('.postlist > .post').last());
+			jsubmit.button('reset');
+			$('#message').val('');
+			
+			// 楼层 +1
+			var jfloor = $('#newfloor');
+			jfloor.html(xn.intval(jfloor.html()) + 1);
+			
+			// 回复数 +1
+			var jposts = $('.posts');
+			jposts.html(xn.intval(jposts.html()) + 1);
+			
+		} else if(code < 0) {
+			$.alert(message);
+			jsubmit.button('reset');
+		} else {
+			jform.find('[name="'+code+'"]').alert(message).focus();
+			jsubmit.button('reset');
+		}
+	});
+	return false;
+});
+
+
+// 缩放图片，适应屏幕大小。
+function resize_image() {
+	var jmessagelist = $('div.message');
+	var first_width = jmessagelist.width(); // 815 : 746; //  734 746
+	jmessagelist.each(function() {
+		var jdiv = $(this);
+		var maxwidth = jdiv.attr('isfirst') ? first_width : jdiv.width(); //  734 746
+		var jmessage_width = Math.min(jdiv.width(), maxwidth);
+		jdiv.find('img, embed, iframe, video').each(function() {
+			var jimg = $(this);
+			var img_width = this.org_width;
+			var img_height = this.org_height;
+			if(!img_width) {
+				var img_width = jimg.attr('width');
+				var img_height = jimg.attr('height');
+				this.org_width = img_width;
+				this.org_height = img_height;
+			}
+			//var percent = xn.min(100, xn.ceil((img_width / jmessage_width) * 100));
+			if(img_width > jmessage_width) {
+				if(this.tagName == 'IMG') {
+					jimg.width(jmessage_width);
+					jimg.css('height', 'auto');
+					jimg.css('cursor', 'pointer');
+					jimg.on('click', function() {
+						//window.open(jimg.attr('src'));
+					});
+				} else {
+					jimg.width(jmessage_width);
+					var height = (img_height / img_width) * jimg.width();
+					jimg.height(height);
+				}
+			}
+		});
+	});
+}
+
+// 对于超宽的表格，加上响应式
+function resize_table() {
+	$('div.message').each(function() {
+		var jdiv = $(this);
+		jdiv.find('table').addClass('table').wrap('<div class="table-responsive"></div>'); 
+	});
+}
+
+$(function() {
+	resize_image();
+	resize_table();
+	$(window).on('resize', resize_image);
+});
+
+// 输入框自动伸缩
+
+var jmessage = $('#message');
+jmessage.on('focus', function() {if(jmessage.t) { clearTimeout(jmessage.t); jmessage.t = null; } jmessage.css('height', '8rem'); });
+jmessage.on('blur', function() {jmessage.t = setTimeout(function() { jmessage.css('height', '2.5rem');}, 1000); });
+
+$('li[data-active="fid-<?php echo $fid;?>"]').addClass('active');
+
+</script>
+
+<?php if($thread['closed'] && ($gid == 0 || $gid > 5)) { ?>
+<script>
+jmessage.val('<?php echo lang('thread_has_already_closed');?>').attr('readonly', 'readonly');
+</script>
+<?php } ?>
+<script>
+$(document).on('click', '.js-haya-favorite-show-users', function() {
+	var show_users = $(".haya-favorite-show-users");
+	var tid = $(this).attr("data-tid");
+	if (show_users.hasClass("d-none")) {
+		show_users.fadeIn().removeClass("d-none");
+		if (!show_users.hasClass("favorite-users")) {
+			show_users.addClass("favorite-users");
+			
+			var url = '<?php echo url("thread-favorite");?>';
+			$.xpost(url, {'tid': tid}, function(code, msg) {
+				if (code == 1) {
+					show_users.find(".haya-favorite-users").html(msg);
+				} else {
+					show_users.removeClass("favorite-users");
+					haya_favorite_msg = msg || "<?php echo lang('haya_favorite_load_error_tip'); ?>";
+					show_users.find(".haya-favorite-users").html(haya_favorite_msg);
+				}
+			});
+		}
+	} else {
+		show_users.fadeOut().addClass("d-none");
+	}
+});
+
+<?php if ($uid) { ?>
+$(document).on('click', '.js-haya-favorite-add', function() {
+	$(this).attr("disabled", "disabled");
+
+	var thiz = $(this);
+	var tid = thiz.attr("data-tid");
+	var url = '<?php echo url("my-favorite-create");?>';
+	$.xpost(url, {'tid': tid}, function(code, msg){
+		if (code == 1) {
+			thiz.removeClass('js-haya-favorite-add')
+				.addClass('js-haya-favorite-del')				
+				.attr('title', '<?php echo lang('haya_favorite_delete_favorite'); ?>');		
+		
+			thiz.find(".icon").removeClass('icon-star-o')
+				.addClass('icon-star')
+				.attr("aria-label", '<?php echo lang('haya_favorite_delete_favorite'); ?>');
+				
+			thiz.find(".haya-favorite-btn")
+				.text('<?php echo lang('haya_favorite_delete'); ?>');
+				
+			$(".haya-favorite-show-users").find(".haya-favorite-users").html(msg.users);
+			$(".haya-favorite-user-count").text(msg.count);			
+		} else {
+			$.alert(msg);
+		}
+		
+		thiz.removeAttr("disabled");
+	});
+});
+
+$(document).on('click', '.js-haya-favorite-del', function() {
+	$(this).attr("disabled", "disabled");
+
+	var thiz = $(this);
+	var tid = thiz.attr("data-tid");
+	var url = '<?php echo url("my-favorite-delete");?>';
+	$.xpost(url, {'tid': tid},function(code,msg){
+		if (code == 1) {				
+			thiz.removeClass('js-haya-favorite-del')
+				.addClass('js-haya-favorite-add')
+				.attr('title', '<?php echo lang('haya_favorite_add'); ?>');		
+		
+			thiz.find(".icon").removeClass('icon-star')
+				.addClass('icon-star-o')
+				.attr("aria-label", '<?php echo lang('haya_favorite_add'); ?>');
+				
+			thiz.find(".haya-favorite-btn")
+				.text('<?php echo lang('haya_favorite_add'); ?>');
+		
+			$(".haya-favorite-show-users").find(".haya-favorite-users").html(msg.users);
+			$(".haya-favorite-user-count").text(msg.count);				
+		} else {
+			$.alert(msg);
+		}
+		
+		thiz.removeAttr("disabled");
+	});
+});
+<?php } else { ?>
+$(document).on('click', '.js-haya-favorite-tip', function() {
+	$.confirm('<?php echo lang('haya_favorite_add_favorite_confirm_title'); ?>', function() {
+		window.location = "<?php echo url('user-login'); ?>";
+	}, {'body': '<?php echo lang('haya_favorite_login_favorite_tip'); ?>'});		
+});
+<?php } ?>
+</script>
+<script>
+<?php
+if (isset($haya_post_like_config['open_thread'])
+	&& $haya_post_like_config['open_thread'] == 1
+) {
+?>
+	<?php if ($uid) { ?>
+	$(document).on('click', '.js-haya-post-like-thread-add', function() {
+		$(this).attr("disabled", "disabled");
+
+		var thiz = $(this);
+		var pid = thiz.attr("data-pid");
+		var url = '<?php echo url("post-post_like-create");?>';
+		$.xpost(url, {'pid': pid}, function(code, msg){
+			if (code == 1) {
+				thiz.removeClass('js-haya-post-like-thread-add')
+					.addClass('js-haya-post-like-thread-del')				
+					.attr('title', '<?php echo $haya_post_like_is_delete ? lang('haya_post_like_unlike') : lang('haya_post_like_has_like');?>');		
+			
+				thiz.find(".icon").removeClass('icon-thumbs-o-up')
+					.addClass('icon-thumbs-up')
+					.attr("aria-label", '<?php echo $haya_post_like_is_delete ? lang('haya_post_like_unlike') : lang('haya_post_like_has_like');?>');
+					
+				thiz.find(".haya-post-like-thread-btn")
+					.text('<?php echo lang('haya_post_like_has_like');?>');
+					
+				$(".haya-post-like-thread-user-count").text(msg.count);			
+			} else {
+				$.alert(msg);
+			}
+			
+			thiz.removeAttr("disabled");
+		});
+	});
+	
+	<?php if ($haya_post_like_is_delete) { ?>
+	$(document).on('click', '.js-haya-post-like-thread-del', function() {
+		$(this).attr("disabled", "disabled");
+
+		var thiz = $(this);
+		var pid = thiz.attr("data-pid");
+		var url = '<?php echo url("post-post_like-delete");?>';
+		$.xpost(url, {'pid': pid}, function(code, msg) {
+			if (code == 1) {
+				thiz.removeClass('js-haya-post-like-thread-del')
+					.addClass('js-haya-post-like-thread-add')				
+					.attr('title', '<?php echo lang('haya_post_like_like_thread');?>');		
+			
+				thiz.find(".icon").removeClass('icon-thumbs-up')
+					.addClass('icon-thumbs-o-up')
+					.attr("aria-label", '<?php echo lang('haya_post_like_like_thread');?>');
+					
+				thiz.find(".haya-post-like-thread-btn")
+					.text('<?php echo lang('haya_post_like_like');?>');
+					
+				$(".haya-post-like-thread-user-count").text(msg.count);			
+			} else {
+				$.alert(msg);
+			}
+			
+			thiz.removeAttr("disabled");
+		});
+	});
+	<?php } ?>
+	
+	<?php } else { ?>
+	$(document).on('click', '.js-haya-post-like-thread-tip', function() {
+		$.confirm('<?php echo lang('haya_post_like_tip_title'); ?>', function() {
+			window.location = "<?php echo url('user-login'); ?>";
+		}, {'body': '<?php echo lang('haya_post_like_login_like_thread_tip'); ?>'});		
+	});
+	<?php } ?>
+<?php } ?>
+
+<?php
+if (isset($haya_post_like_config['open_post'])
+	&& $haya_post_like_config['open_post'] == 1
+) {
+?>
+	<?php if ($uid) { ?>
+	$(document).on('click', '.js-haya-post-like-post-add', function() {
+		var thiz = $(this);
+		
+		thiz.removeClass('js-haya-post-like-post-add');
+		
+		var pid = thiz.attr("data-pid");
+		var url = '<?php echo url("post-post_like-create");?>';	
+		$.xpost(url, {'pid': pid}, function(code, msg){
+			if (code == 1) {
+				thiz.removeClass('js-haya-post-like-post-add')
+					.addClass('js-haya-post-like-post-del')				
+					.addClass('haya-post-like-loved')				
+					.attr('title', '<?php echo $haya_post_like_is_delete ? lang('haya_post_like_unlike') : lang('haya_post_like_has_like');?>');		
+			
+				thiz.find(".icon").removeClass('icon-thumbs-o-up')
+					.addClass('icon-thumbs-up')
+					.attr("aria-label", '<?php echo $haya_post_like_is_delete ? lang('haya_post_like_unlike') : lang('haya_post_like_has_like');?>');
+					
+				thiz.find(".haya-post-like-post-user-count").text(msg.count);			
+			} else {
+				thiz.addClass('js-haya-post-like-post-add');
+				$.alert(msg);
+			}
+		});
+	});
+	
+	<?php if ($haya_post_like_is_delete) { ?>
+	$(document).on('click', '.js-haya-post-like-post-del', function() {
+		var thiz = $(this);
+		
+		thiz.removeClass('js-haya-post-like-post-del');
+		
+		var pid = thiz.attr("data-pid");
+		var url = '<?php echo url("post-post_like-delete");?>';
+		$.xpost(url, {'pid': pid}, function(code, msg){
+			if (code == 1) {
+				thiz.removeClass('js-haya-post-like-post-del')
+					.addClass('js-haya-post-like-post-add')	
+					.removeClass('haya-post-like-loved')
+					.attr('title', '<?php echo lang('haya_post_like_like_post');?>');		
+			
+				thiz.find(".icon").removeClass('icon-thumbs-up')
+					.addClass('icon-thumbs-o-up')
+					.attr("aria-label", '<?php echo lang('haya_post_like_like_post');?>');
+					
+				thiz.find(".haya-post-like-post-user-count").text(msg.count);			
+			} else {
+				thiz.addClass('js-haya-post-like-post-del');
+				$.alert(msg);
+			}
+		});
+	});
+	<?php } ?>
+	
+	<?php } else { ?>
+	$(document).on('click', '.js-haya-post-like-post-tip', function() {	
+		$.confirm('<?php echo lang('haya_post_like_tip_title'); ?>', function() {
+			window.location = "<?php echo url('user-login'); ?>";
+		}, {'body': '<?php echo lang('haya_post_like_login_like_post_tip'); ?>'});		
+	});
+	<?php } ?>
+<?php } ?>
+</script>
+<script>
+jsearch_form = $('#search_form');
+jsearch_form.on('submit', function() {
+	var keyword = jsearch_form.find('input[name="keyword"]').val();
+	var url = xn.url('search-'+xn.urlencode(keyword));
+	window.location = url;
+	return false;
+});
+</script>

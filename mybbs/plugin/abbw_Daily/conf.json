@@ -1,0 +1,11 @@
+{
+    "name": "每日一句",
+    "brief": "在首页顶部显示每日一句，词典来自金山词霸",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 1,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": "笨蛋海绵"
+}

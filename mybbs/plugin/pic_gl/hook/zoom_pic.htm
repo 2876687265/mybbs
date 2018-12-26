@@ -1,0 +1,64 @@
+<?php
+	$staticpiclist = db_find('staticpic', array('weizhi'=>2), array('rank'=>-1), 1, 1000, 'staticpicid');	
+?>
+<div class="box">
+	<style type="text/css">
+		.pic-list { padding-top: 10px; text-align: center;}
+		.pic-list span { float: left; width: 50%;}
+		.pic-list span img { width: 90%; height: 250px; margin: 0 auto;}
+		.pic-list span em { height: 40px; line-height: 40px;}
+		.photoBox{display:inline-block;position:relative;}
+		.photoBox img{display:block;}
+		.zoom{}
+		.photoArea{zoom:1; margin: 0;}
+		.minifier{}
+		.photoArea {}
+		.photoArea img { width: 100%; height: auto;}
+	</style>
+	<script>
+		function zoom_image(obj) {
+			if (obj.hasClass('photoBox')) {
+				var load = obj.find('.loadingBox');
+				load.show();
+				var img = obj.next().find('img');
+				if (img.attr('src') == 'about:blank') {
+					img.attr('src', obj.find('img').attr('src').replace('m.', 'l.'));
+					//img.load(function() {
+						//obj.hide();
+						//obj.next().show();
+					//});
+					obj.hide();
+					obj.next().show();
+				} else {
+					obj.hide();
+					obj.next().show();
+				}
+			} else {
+				obj.hide();
+				obj.prev().show();
+				obj.prev().find('.loadingBox').hide();
+			}
+		}
+	</script>
+	<table border="0" width="100%" style="border-collapse: collapse">
+		<tbody>
+			<tr>
+				<td bordercolor="#E5E5E5">
+					<p align="center"><font face="微软雅黑" size="3" color="#FF0000">点击图片可放大查看</font></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="pic-list grey-line clearfix">
+			<?php foreach($staticpiclist as $key=>$val){ ?>
+				<span class="photoBox">
+					<img src="<?php echo $val['picurl'] ?>" class="zoom" onclick="zoom_image($(this).parent());"><em>挂牌天书</em>
+				</span>
+				<div class="photoArea" style="display:none;">
+					<p>
+						<img src="about:blank" class="minifier" onclick="zoom_image($(this).parent().parent());">
+					</p>
+				</div>
+			<?php } ?>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+{
+    "name": "会员用户组图标显示",
+    "brief": "1、可批量设置会员所在用户组图标颜色及名称<br> 2、可设置不同用户组会员显示不同的颜色<br> 3、八彩五月网<a href='http://www.8c5.cn'  target='_blank'><span style='color:red;'><b>www.8c5.cn</b></span></a><br>4、使用有问题联系客服QQ/微信：312215120 <br>",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

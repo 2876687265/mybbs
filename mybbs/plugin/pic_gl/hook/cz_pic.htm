@@ -1,0 +1,11 @@
+<?php
+	$staticpiclist = db_find('staticpic', array('weizhi'=>3), array('rank'=>-1), 1, 1000, 'staticpicid');	
+?>
+<div class="box">
+	<?php foreach($staticpiclist as $key=>$val){ ?>
+		<div class="cont center"><img src="<?php echo $val['picurl']; ?>" border="0" width="100%" height="100%" style="border: 0px; vertical-align: middle;"></div>
+	<?php 
+		break;
+		} 
+	?>
+</div>

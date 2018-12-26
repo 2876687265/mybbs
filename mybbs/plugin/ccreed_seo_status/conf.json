@@ -1,0 +1,13 @@
+{
+    "name": "搜索引擎收录状态判断",
+    "brief": "在帖子的标题下面显示帖子在百度的收录状态。",
+    "version": "1.2",
+    "bbs_version": "4.0",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [
+        1
+    ],
+    "overwrites_rank": [],
+    "dependencies": []
+}

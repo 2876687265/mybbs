@@ -1,0 +1,185 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+<style type="text/css">
+.huoyanju_vip {display: block;border: 1px solid #ced4da;border-radius: 0.25rem;width: 100% !important;color: #84878a;}
+.huoyanju_vip_hr_1 {margin-bottom: 1.8rem;}
+.huoyanju_vip_hr_2 {margin-top: 1.5rem; margin-right: 6.5rem; margin-bottom: 1.5rem; margin-left: 3.85rem;}
+.huoyanju_vip_hr_3 {margin-bottom: 0.3rem; width: 795px; height: 309px; border: 1px solid #e0e1e2;}
+textarea {
+  display: block;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 22px;
+  padding-left: 5px;
+}
+</style>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card">
+			<div class="card-body">
+			<form action="<?php echo url("plugin-setting-huoyanju_vip");?>" method="post" id="form">
+				<h4 class="card-title mb-3">批量设置不同页面会员图标颜色及大小</h4>
+				<hr class="huoyanju_vip_hr_2" />
+				<div style="display:flex; justify-content:space-around;">
+				<h5 class="card-title mb-3">首页和分类列表页</h5>
+                <!-- 列表页会员图标颜色设置 -->
+				<div class="form-group row"> 
+				<label class="col-md-5 form-control-label text-md-right pr-0">图标颜色：</label>
+			    <div class="col-sm-5">
+                <textarea name="huoyanju_vip_name_1_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_1_htm'];?></textarea>			
+		        </div>
+	            </div>
+                <!-- 列表页会员图标大小设置 -->
+				<div class="form-group row"> 
+				<label class="col-md-5 form-control-label text-md-right pr-0">图标大小：</label>
+			    <div class="col-sm-5">
+                <textarea name="huoyanju_vip_name_2_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_2_htm'];?></textarea>			
+		        </div>
+	            </div>
+				</div>
+				<div style="display:flex; justify-content:space-around;">
+				<h5 class="card-title mb-3">文章页面作者图标</h5>
+                <!-- 文章页面会员图标颜色设置 -->
+				<div class="form-group row"> 
+				<label class="col-md-5 form-control-label text-md-right pr-0">图标颜色：</label>
+			    <div class="col-sm-5">
+                <textarea name="huoyanju_vip_name_3_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_3_htm'];?></textarea>			
+		        </div>
+	            </div>
+                <!-- 文章页面会员图标大小设置 -->
+				<div class="form-group row"> 
+				<label class="col-md-5 form-control-label text-md-right pr-0">图标大小：</label>
+			    <div class="col-sm-5">
+                <textarea name="huoyanju_vip_name_4_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_4_htm'];?></textarea>			
+		        </div>
+	            </div>
+				</div>
+				<div style="display:flex; justify-content:space-around;">
+				<h5 class="card-title mb-5">回复列表页面图标</h5>
+                <!-- 回复列表页会员图标颜色设置 -->
+				<div class="form-group row"> 
+				<label class="col-md-5 form-control-label text-md-right pr-0">图标颜色：</label>
+			    <div class="col-sm-5">
+                <textarea name="huoyanju_vip_name_5_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_5_htm'];?></textarea>			
+		        </div>
+	            </div>
+                <!-- 回复列表页会员图标大小设置 -->
+				<div class="form-group row"> 
+				<label class="col-md-5 form-control-label text-md-right pr-0">图标大小：</label>
+			    <div class="col-sm-5">
+                <textarea name="huoyanju_vip_name_6_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_6_htm'];?></textarea>			
+		        </div>
+	            </div>
+				</div>
+				<hr class="huoyanju_vip_hr_2" />
+				<h4 class="card-title mb-3">单独设置不同等级会员图标颜色（如不进行单独设置，默认为批量设置的颜色！）</h4>
+                <!-- 管理员组，用户组ID：1 -->
+				<div class="form-group row"> 
+				<label class="col-md-2 form-control-label text-md-right pr-0">管理员，用户组ID：1</label>
+			    <div class="col-sm-9">
+                <textarea name="huoyanju_vip_name_7_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_7_htm'];?></textarea>			
+		        </div>
+	            </div>
+				<!-- 超级版主组，用户组ID：2 -->
+				<div class="form-group row"> 
+				<label class="col-md-2 form-control-label text-md-right pr-0">超级版主，用户组ID：2</label>
+			    <div class="col-sm-9">
+                <textarea name="huoyanju_vip_name_8_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_8_htm'];?></textarea>			
+		        </div>
+	            </div>
+				
+				<!-- 版主组，版主组ID：4 -->
+				<div class="form-group row"> 
+				<label class="col-md-2 form-control-label text-md-right pr-0">版主，用户组ID：4</label>
+			    <div class="col-sm-9">
+                <textarea name="huoyanju_vip_name_10_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_10_htm'];?></textarea>			
+		        </div>
+	            </div>
+				
+				<!-- 实习版主组，版主组ID：5 -->
+				<div class="form-group row"> 
+				<label class="col-md-2 form-control-label text-md-right pr-0">实习版主，用户组ID：5</label>
+			    <div class="col-sm-9">
+                <textarea name="huoyanju_vip_name_11_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_11_htm'];?></textarea>			
+		        </div>
+	            </div>
+				
+				<!-- 待验证用户组，版主组ID：6 -->
+				<div class="form-group row"> 
+				<label class="col-md-2 form-control-label text-md-right pr-0">待验证用户，用户组ID：6</label>
+			    <div class="col-sm-9">
+                <textarea name="huoyanju_vip_name_12_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_12_htm'];?></textarea>			
+		        </div>
+	            </div>
+				
+				<!-- 一级用户组，版主组ID：101-->
+				<div class="form-group row"> 
+				<label class="col-md-2 form-control-label text-md-right pr-0">一级用户，用户组ID：101</label>
+			    <div class="col-sm-9">
+                <textarea name="huoyanju_vip_name_101_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_101_htm'];?></textarea>			
+		        </div>
+	            </div>
+				
+				<!-- 二级用户组，版主组ID：102 -->
+				<div class="form-group row"> 
+				<label class="col-md-2 form-control-label text-md-right pr-0">二级用户，用户组ID：102</label>
+			    <div class="col-sm-9">
+                <textarea name="huoyanju_vip_name_102_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_102_htm'];?></textarea>			
+		        </div>
+	            </div>
+				
+				<!-- 三级用户组，版主组ID：103 -->
+				<div class="form-group row"> 
+				<label class="col-md-2 form-control-label text-md-right pr-0">三级用户，用户组ID：103</label>
+			    <div class="col-sm-9">
+                <textarea name="huoyanju_vip_name_103_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_103_htm'];?></textarea>			
+		        </div>
+	            </div>
+				
+				<!-- 四级用户组，版主组ID:104 -->
+				<div class="form-group row"> 
+				<label class="col-md-2 form-control-label text-md-right pr-0">四级用户，用户组ID：104</label>
+			    <div class="col-sm-9">
+                <textarea name="huoyanju_vip_name_104_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_104_htm'];?></textarea>			
+		        </div>
+	            </div>
+				
+				<!-- 五级用户组，版主组ID：105 -->
+				<div class="form-group row"> 
+				<label class="col-md-2 form-control-label text-md-right pr-0">五级用户，用户组ID：105</label>
+			    <div class="col-sm-9">
+                <textarea name="huoyanju_vip_name_105_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_105_htm'];?></textarea>			
+		        </div>
+	            </div>
+				
+				<!-- VIP用户组，版主组ID：106 -->
+				<div class="form-group row"> 
+				<label class="col-md-2 form-control-label text-md-right pr-0">VIP用户，用户组ID：106</label>
+			    <div class="col-sm-9">
+                <textarea name="huoyanju_vip_name_106_htm" class="huoyanju_vip" style="height: 28px; resize: none;"><?php echo $setting['huoyanju_vip_name_106_htm'];?></textarea>			
+		        </div>
+	            </div>
+				<div class="form-group row">
+						<label class="col-sm-2 form-control-label"></label>
+						<div class="col-sm-9">
+							<button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button>
+							<a role="button" class="btn btn-secondary btn-block mt-3" href="javascript:history.back();"><?php echo lang('back');?></a>
+						</div>
+					</div>
+			</form>
+            </div>
+			<hr class="huoyanju_vip_hr_2" />
+			<div class="card-body" >
+		       <h4 class="card-title mb-3">用户交流渠道</h4>
+                  官方网站：www.8c5.cn/ <a href="http://www.8c5.cn" target="_blank" style="text-decoration: none">点击进入</a><br>
+                  客服QQ群/微信：312215120<br>
+		          QQ交流分享群：146126201  <a target='_blank' href='//shang.qq.com/wpa/qunwpa?idkey=419e79c4fd427f516556b1e496a6ab3691e575bd5fbd765f569f50eaa1c32e84'><img border='0' src='//pub.idqqimg.com/wpa/images/group.png' alt='xiuno插件-8c5.cn' title='xiuno插件-8c5.cn'></a><br>
+		          我们的服务范围：xiuno功能插件，xiuno模板主题开发，xiuno网站体系建设，为您提供一站式服务！
+				 
+		    </div>
+  
+</div>
+</div>
+</div>
+
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>

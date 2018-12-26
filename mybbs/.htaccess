@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^admin/(.*)\.htm(.*)$ /admin/index.php?$1.htm$2 [L]
+	RewriteRule ^(.*)\.htm(.*)$ /index.php?$1.htm$2 [L]
+</IfModule>

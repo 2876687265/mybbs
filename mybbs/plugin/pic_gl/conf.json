@@ -1,0 +1,10 @@
+{
+    "name": "静态展示图片管理",
+    "brief": "静态展示图片管理",
+    "version": "1.0.1",
+    "bbs_version": "4.0",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "dependencies": []
+}

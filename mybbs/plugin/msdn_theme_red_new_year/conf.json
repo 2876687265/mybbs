@@ -1,0 +1,10 @@
+{
+    "name": "私方主题：新年红色喜庆风格",
+    "brief": "基于官方主题修改制作， 新年红色喜庆主题。<br><a target='_blank' href='http://www.wogaosuni.com'>预览【MSDN,我告诉你】</a>，可以自由替换背景。",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 1,
+    "enable": 0,
+    "hooks_rank": [],
+    "dependencies": []
+}

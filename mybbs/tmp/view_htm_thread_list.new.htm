@@ -1,0 +1,262 @@
+					
+
+
+<style>
+	.u-list-look li {
+	    padding: 10px 5px 10px 10px;
+	    border-bottom: solid 1px #ddd;
+	}
+	.u-list-look .look-sum {
+	    height: 36px;
+	    line-height: 36px;
+	    color: #aaa;
+	}
+	.u-list-look .look-sum .look-pic {
+	    float: left;
+	    width: 36px;
+	    height: 36px;
+	    margin-right: 10px;
+	    display: inline-block;
+	}
+	.look-pic img{
+    	border-radius: 2.4rem;
+	}
+	.u-list-look .look-sum .look-author {
+	    float: left;
+	    margin-right: 10px;
+	    color: #07a21e;
+	}
+	.u-list-look .look-sum .look-date {
+	    float: left;
+	    font-size: 14px;
+	}
+	.clearfix:after {
+	    content: ".";
+	    display: block;
+	    height: 0;
+	    clear: both;
+	    overflow: hidden;
+	    visibility: hidden;
+	}
+	.u-list-look h3 {
+	    margin-bottom: 5px;
+	    padding: 4px 10px 5px 0;
+	    font-size: 20px;
+	    overflow: hidden;
+	    line-height: 26px;
+	}
+	.u-list-look .look-menu {
+	    height: 24px;
+	    line-height: 24px;
+	    color: #aaa;
+	    font-size: 14px;
+        padding: 0 2px;
+	}
+	.u-list-look .look-menu span.look-menu4 {
+	    float: right;
+	    margin-right: 10px;
+	}
+	.u-list-look .look-menu span {
+	    height: 24px;
+	    margin-right: 20px;
+	    position: relative;
+	}
+	.u-list-look .look-menu a {
+	    color: #aaa;
+	}
+</style>
+
+
+
+		<!-- <ul class="u-list-look" id="topicListContainer">
+			<li>
+				<div class="look-sum clearfix">
+					<span class="look-pic"><img src="<?php echo $threadlist[1]['user_avatar_url']; ?>"></span> 
+					<a href="<?php $uid = $threadlist[1]['uid']; echo url("user-$uid");?>">
+						<span class="look-author"><?php echo $threadlist[1]['username']; ?></span> 
+					</a>
+					<span class="look-date"><?php echo date('Y-m-d H:i:s',$threadlist[1]['create_date']); ?></span>
+				</div>
+				<h3 class="look-title">
+					<a target="_blank" href="<?php $tid = $threadlist[1]['tid']; echo url("thread-$tid");?>">
+						<?php echo $threadlist[1]['subject']; ?>
+					</a> 
+				</h3>
+
+				<div class="look-menu clearfix">
+					<span class="look-menu4"><i class="icon-edit"></i> <?php echo date('Y-m-d H:i:s',$threadlist[1]['last_date']); ?></span> 
+					<span class="look-menu1"><i class="icon-eye"></i><?php echo $threadlist[1]['views']; ?></span> 
+					<span class="look-menu2"><i class="icon-comment-o"></i><?php echo $threadlist[1]['posts']; ?></span> 
+					<span class="look-menu2"><i class="icon-thumbs-o-up"></i><?php echo $threadlist[1]['likes']; ?></span> 
+				</div>
+			</li>
+
+			<li>
+				
+				<div class="media-body">
+					<div class="look-sum clearfix">
+						<span class="look-pic"><img src="<?php echo $threadlist[1]['user_avatar_url']; ?>"></span> 
+						<a href="<?php $uid = $threadlist[1]['uid']; echo url("user-$uid");?>">
+							<span class="look-author"><?php echo $threadlist[1]['username']; ?></span> 
+						</a>
+						<span class="look-date"><?php echo date('Y-m-d H:i:s',$threadlist[1]['last_date']); ?></span>
+					</div>
+					<h3 class="look-title">
+						<a target="_blank" href="<?php $tid = $threadlist[1]['tid']; echo url("thread-$tid");?>">
+							<?php echo $threadlist[1]['subject']; ?>
+						</a> 
+					</h3>
+
+					<div class="look-menu clearfix">
+						<span class="look-menu4"><i class="icon-edit"></i> <?php echo date('Y-m-d H:i:s',$threadlist[1]['last_date']);?></span> 
+						<span class="look-menu1"><i class="icon-eye"></i><?php echo $threadlist[1]['views']; ?></span> 
+						<span class="look-menu2"><i class="icon-comment-o"></i><?php echo $threadlist[1]['posts']; ?></span> 
+						<span class="look-menu2"><i class="icon-thumbs-o-up"></i><?php echo $threadlist[1]['likes']; ?></span> 
+					</div>
+				</div>
+			</li>
+		</ul> -->
+
+		<ul class="list-unstyled threadlist mb-0 u-list-look">
+					<?php 
+					if($threadlist) { 
+						$have_allowtop = 0;
+						foreach($threadlist as &$_thread) {
+							$_thread['allowtop'] = forum_access_mod($_thread['fid'], $gid, 'allowtop');
+							if($_thread['allowtop']) $have_allowtop = 1;
+						}
+					}
+					?>
+
+					<?php if($threadlist) { foreach($threadlist as &$_thread) { ?>
+					<li class="media thread tap <?php echo $_thread['top_class'];?> " data-href="<?php echo url("thread-$_thread[tid]");?>" data-tid="<?php echo $_thread['tid'];?>">
+						<?php if($have_allowtop) { ?>
+							<?php if($_thread['allowtop']) { ?>
+							<input type="checkbox" name="modtid" class="mt-3 mr-2" value="<?php echo $_thread['tid']; ?>" <?php echo empty($mod_input_checked) ? '' : 'checked disabled';?>  style="    margin-top: 3.5rem !important;"/>
+							<?php } ?>
+						
+						<?php } ?>
+						
+						<a href="<?php echo url("user-$_thread[uid]");?>" tabindex="-1" class="ml-1 mt-1 mr-3">
+							<img class="avatar-3" src="<?php echo $_thread['user_avatar_url'];?>">
+						</a>
+						
+					
+						<div class="media-body">
+
+							<div class="d-flex justify-content-between small mt-1" style="margin-bottom: 5px;">
+								<div>
+									<span style="padding-bottom:0;margin-bottom:0;color:<?php echo setting_get('huoyanju_vip_name_1_htm');?>; ">	<i class="iconfont icon-<?php echo'v'. $_thread['user']['gid'] ;?>" style="font-size:<?php echo setting_get('huoyanju_vip_name_2_htm');?> !important;"></i>	</span>
+									<span class="username text-grey mr-1 <?php if($_thread['lastuid']) { ?> hidden-sm<?php } ?>" uid="<?php echo $_thread['uid'];?>"><?php echo $_thread['username'];?></span>
+									<span class="date text-grey<?php if($_thread['lastuid']) { ?> hidden-sm<?php } ?>"><?php echo $_thread['create_date_fmt'];?></span>
+									
+									
+									
+									<?php if($_thread['lastuid']) { ?>
+									<span>
+										<span class="text-grey mx-2">←</span>
+										<span class="username text-grey mr-1" uid="<?php echo $_thread['lastuid'];?>"><?php echo $_thread['lastusername'];?></span>
+										<span class="text-grey"><?php echo $_thread['last_date_fmt'];?></span>
+									</span>
+									<?php } ?>
+									<?php if ($route == 'my' && $action == 'favorite') { ?>
+<span class="ml-3">
+	<a href="javascript:;" title="<?php echo lang('haya_favorite_remove_favorite'); ?>" class="text-grey text-small js-haya-favorite-remove" data-tid="<?php echo intval($_thread['tid']); ?>">
+		<i class="icon-remove" aria-hidden="true"></i> 
+		<?php echo lang('haya_favorite_remove_favorite'); ?>
+	<a>
+</span>
+<?php } ?>
+									 
+								</div>
+								
+							</div>
+
+
+							<div class="subject break-all" style="font-size: 1.35rem; padding: 12px 0;">
+							
+								
+								<?php if($_thread['top'] > 0) { ?>
+									<i class="icon-top-<?php echo $_thread['top']; ?>"></i>
+								<?php } ?>
+								
+								
+								<?php if (isset($route) && ($route == 'my' && $action == 'favorite')) { ?>
+	<a href="<?php echo url("forum-$_thread[fid]");?>" target="_blank" title="<?php echo $_thread['forumname'];?>" class="text-grey">[<?php echo $_thread['forumname'];?>]</a>
+<?php } ?><?php 
+if($_thread['highlight'] == '1' || $_thread['highlight'] == '2' || $_thread['highlight'] == '3' || $_thread['highlight'] == '4' || $_thread['highlight'] == '5') {
+$sg_highlight = kv_get('sg_highlight');
+switch ($_thread['highlight']) {
+case '1': 	$color = $sg_highlight['highlight2']; 	break;
+case '2': 	$color = $sg_highlight['highlight4']; 	break;
+case '3': 	$color = $sg_highlight['highlight6']; 	break;
+case '4': 	$color = $sg_highlight['highlight8']; 	break;
+case '5': 	$color = $sg_highlight['highlight10']; 	break;
+}
+$_thread['subject']="<span style=color:$color;>$_thread[subject]</span>";
+}?>
+								<a href="<?php echo url("thread-$_thread[tid]");?>"><?php echo $_thread['subject'];?></a>
+								
+								
+								
+								<?php if($_thread['files'] > 0) { ?><i class="icon small filetype other"></i><?php } ?>
+								
+								
+								
+								<?php if($_thread['closed'] > 0) { ?><i class="icon-lock"></i><?php } ?>
+								
+							</div>
+
+
+							<div class="text-muted small" style="float:left;font-size: 1em;">
+								
+								<!-- <span class="ml-2 d-none"><i class="icon-eye"></i> <?php echo $_thread['views'];?></span> -->
+								<span class="ml-2"><i class="icon-eye"></i> <?php echo $_thread['views'];?></span>
+								
+								
+								
+								<span class="ml-2"><i class="icon-comment-o"></i> <?php echo $_thread['posts'];?></span>
+								<?php 
+if (isset($haya_post_like_config['open_thread'])
+	&& $haya_post_like_config['open_thread'] == 1
+) {
+?>
+	<?php 
+	if ((isset($haya_post_like_config['list_show_likes'])
+		&& $haya_post_like_config['list_show_likes'] == 1)
+		|| ($route == 'my' || $route == 'user')
+	) {
+	?>
+		<span class="ml-2">
+			<i class="icon-thumbs-o-up" aria-hidden="true"></i> 
+			<?php echo intval($_thread['likes']);?>
+		</span>
+	<?php } ?>
+	
+<?php } ?><?php 
+if ( 
+	(isset($haya_favorite_config['thread_show_favorite']) && $haya_favorite_config['thread_show_favorite'] == 1)
+	|| ($route == 'my' || $route == 'user')
+) { 
+?>
+<span class="ml-2" title="<?php echo intval($_thread['favorites']);?> <?php echo lang('haya_favorite_name'); ?>">
+	<i class="icon-star-o" aria-hidden="true"></i> 
+	<?php echo intval($_thread['favorites']);?>
+</span>
+<?php } ?>
+							</div>
+
+							<div class="text-muted small" style="float:right;font-size: 1em;">
+								<span class="ml-2"><?php echo date('Y-m-d H:i:s',$_thread['create_date']); ?></span>
+							</div>
+
+						</div>
+					</li>
+
+					<?php }} else { ?>
+						<li>
+							<div><?php echo lang('none');?></div>
+						</li>
+					<?php } ?>
+					
+				</ul>

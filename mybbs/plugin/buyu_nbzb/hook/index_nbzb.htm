@@ -1,0 +1,116 @@
+<?php
+	$titles = db_find('thread', array('fid'=>3), array('top'=>-1),1,6);
+	$tid=[];
+	foreach($titles as $vol){
+		$tid[]=$vol['tid'];
+	}
+
+	$tid = implode(',', $tid);
+	$tid = '('.substr($tid,0,strlen($tid)) .')';
+	$list = db_sql_find("select * from bbs_post where isfirst=1 and tid in ".$tid);
+
+	$slidelist = db_find('slide', array('weizhi'=>4), array('rank'=>-1), 1, 1000, 'slideid');
+
+?>
+	<!--内部正版-->
+	<div class="box">
+		
+		<style type="text/css">
+			.style3 {
+				color: #000000;
+				background-color: #00FFFF;
+			}
+			.style4 {
+				font-weight: bold;
+				color: #333333;
+				font-size: medium;
+				font-family: 微软雅黑;
+				background-color: #00FF00;
+			}
+			* { word-wrap: break-word; }
+			*{padding:0;margin:0}
+			* { word-wrap: break-word; }
+			
+			* {
+				PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+			}
+			* {
+				WORD-WRAP: break-word
+			}
+			* {
+				WORD-WRAP: break-word
+			}
+			* {
+				WORD-WRAP: break-word
+			}
+			* {
+				WORD-WRAP: break-word
+			}
+			table td {
+			    border: 1px solid #e5e5e5;
+			    padding: 3px 2px;
+			    word-break: break-all;
+			}
+			.box {
+			    margin-bottom: 0.2rem;
+			    margin-top: -0.6rem;
+			    background: #f8f9fa;
+			    box-shadow: 2px 2px 3px rgba(173, 181, 189, 0.25);
+			}
+		</style>
+		
+		<table border="0" width="100%" height="121" cellspacing="0" cellpadding="0">
+			<tbody>
+				
+				<tr>
+					<td align="center" bgcolor="#FF0000" height="29">
+						<img src="http://345003.com/tu/pt.png" width="100%" height="50">
+					</td>
+				</tr>
+				<?php foreach($list as $vol){ ?>
+					<tr>
+						<td align="center" height="30">
+							<a target="_blank" href="<?php echo url("thread-$vol[tid]");?>" style="text-decoration: none">
+								<b>
+									<font face="微软雅黑" size="4"><?php echo $vol['message']; ?></font>
+								</b>
+							</a>
+						</td>
+					</tr>
+				<?php } ?>				
+			</tbody>
+		</table>
+
+	</div>
+	<div class="mb-3"></div>	
+	
+
+	<!--内部正版下方广告-->
+	<div class="box" >
+		<table border="0" width="100%" id="table1" cellspacing="0" cellpadding="0" style="font-family: 微软雅黑; font-size: 14pt; text-align: center">
+		  	<tbody><tr>
+			    <td colspan="2" bgcolor="#000000"><b><font color="#FF0000">请收藏备用网址，以便访问本站</font></b></td>
+			    </tr>
+			    <tr>
+			    <td bgcolor="#CCFFFF"><b><font color="#FF0000">①:</font><font color="#0000FF">345003</font><font color="#FF0000">a</font>.com</b></td>
+			    <td bgcolor="#CCFFFF"><b><font color="#FF0000">②:</font><font color="#0000FF">345003</font><font color="#FF0000">b</font>.com</b></td>
+			    </tr>
+			    <tr>
+			    <td bgcolor="#CCFFFF"><b><font color="#FF0000">③:</font><font color="#0000FF">345003</font><font color="#FF0000">c</font>.com</b></td>
+			    <td bgcolor="#00FF00"><b><font color="#FF0000">
+			    <span style="text-decoration: none">
+				<a target="_blank" class="noline" href="http://www.kj4949a.com/#345003" style="text-decoration: none"><font color="#FF0000">六合彩最快开奖现场</font></a></span></font></b></td>
+			  </tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="mb-3"></div>	
+
+
+	<!--开奖结果-->
+	<!-- <div class="box" style="margin-bottom: 1rem;    padding: 5px;">
+		<iframe src="http://kj4949.com/bm/kj49.html" frameborder="0" style="width:100%;height:148px" target="_blank" scrolling="no" name="I1"></iframe>
+	</div>
+	<div class="mb-3"></div> -->
+
+

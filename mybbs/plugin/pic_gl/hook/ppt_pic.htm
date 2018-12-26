@@ -1,0 +1,71 @@
+<?php
+	$staticpiclist = db_find('staticpic', array('weizhi'=>1), array('rank'=>-1), 1, 1000, 'staticpicid');	
+?>
+
+<div class="box">
+	<script>
+	<!-- var picArrx=new Array( -->
+	<!-- 'http://www.766929.com/pt/pt145.jpg', -->
+	<!-- 'http://www.766929.com/pt/pt144.jpg', -->
+	<!-- 'http://www.766929.com/pt/pt143.jpg', -->
+	<!-- 'http://www.766929.com/pt/pt142.jpg', -->
+	<!-- 'http://www.766929.com/pt/pt141.jpg', -->
+	<!-- 'http://www.766929.com/pt/pt140.jpg', -->
+	<!-- 'http://www.766929.com/pt/pt139.jpg', -->
+	<!-- 'http://www.766929.com/pt/pt138.jpg', -->
+	<!-- 'http://www.766929.com/pt/pt137.jpg', -->
+	<!-- 'http://www.766929.com/pt/pt136.jpg', -->
+	<!-- );  -->
+	var picArrx=new Array();
+	<?php
+		$a=0;
+		foreach($staticpiclist as $key=>$val){
+	?>
+		picArrx[<?php echo $a; ?>]='<?php echo addslashes($val['picurl']) ?>'
+	<?php
+		$a++;
+		}
+	?>
+		var indexx=0;
+		function nextx(){
+			indexx++;
+			if(indexx==picArrx.length){
+				indexx=0;
+			}
+			document.getElementById('123sjkjpicx').src=picArrx[indexx];
+		}
+		function prex(){
+			indexx--;
+			if(indexx<0){
+				indexx=picArrx.length-1;
+			}
+			document.getElementById('123sjkjpicx').src=picArrx[indexx];
+		}
+	</script>
+	<!--script type="text/javascript" src="http://www.766929.com/js/ptt.js" charset="gbk"></script><meta charset="utf-8"-->
+
+	<style>
+		.bizhong123 { width:100%; margin:0 auto;}
+		.bizhong123-box{ float: left; width: 100%; display:none;}
+		.action-bz{display:block;}
+		.bizhong123-page { height: 40px; padding-top: 5px;}
+		.bizhong123-btn { float: left; width: calc( 50% - 10px); height: 38px; line-height: 38px; margin-right: 10px; text-align: center; display: inline-block; background: #aaa; border: solid 1px #ccc; border-radius: 5px; background-image: linear-gradient(to top, #ddd, #fff); cursor: pointer;}
+		.bizhong123-btn:hover { background-image: linear-gradient(to bottom, #ddd, #fff);}
+		.bizhong123-btn.bizhong123-pre {}
+		.bizhong123-btn.bizhong123-next { margin-right: 0;}
+		.bizhong123 img {width:100%; border-collapse: collapse; font-weight: bold;}
+	</style>
+	<div class="bizhong123 clearfix">
+		<div class="bizhong123-box action-bz">
+			<?php foreach($staticpiclist as $key=>$val){ ?>
+				<img src="<?php echo $val['picurl']; ?>" id="123sjkjpicx">
+			<?php break; }?>
+		</div>   
+	</div>
+    
+	<div class="bizhong123-page">
+		<span class="bizhong123-btn bizhong123-pre" onclick="prex();">下一期</span> 
+		<span class="bizhong123-btn bizhong123-next" onclick="nextx();">上一期</span>
+	</div>
+
+</div>

@@ -1,0 +1,265 @@
+<?php
+
+function getPost($fid){
+
+	$titles = db_find('thread', array('fid'=>$fid), array('top'=>-1),1,6);
+	$tid=[];
+	foreach($titles as $vol){
+		$tid[]=$vol['tid'];
+	}
+
+	$tid = implode(',', $tid);
+	$tid = '('.substr($tid,0,strlen($tid)) .')';
+	$list1 = db_sql_find("select * from bbs_post where isfirst=1 and tid in ".$tid);
+	return $list1;
+
+}
+
+
+$list1 = getPost(5);
+$list2 = getPost(6);
+$list3 = getPost(7);
+
+?>
+
+
+<div class="box">
+	<div class="adbox">
+		<table width="100%" cellspacing="0" cellpadding="0" data-sort="sortDisabled" id="table3">
+			<tbody>
+				<tr>
+					<td bgcolor="#FFFFFF" style="margin: 0px; padding: 3px 2px; border-color: rgb(209, 209, 209); word-break: break-all;">
+						<a target="_blank" href="http://119.42.149.156/8903.html">
+							<img border="0" src="http://345003.com/img/js5.gif" width="100%" height="92">
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+<div class="box">
+	<div class="adbox">
+		<style type="text/css">
+			.style3 {
+				color: #000000;
+				background-color: #00FFFF;
+			}
+			.style4 {
+				font-weight: bold;
+				color: #333333;
+				font-size: medium;
+				font-family: 微软雅黑;
+				background-color: #00FF00;
+			}
+			* { word-wrap: break-word; }
+			*{padding:0;margin:0}
+			* { word-wrap: break-word; }
+			
+			* {
+				PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+			}
+			* {
+				WORD-WRAP: break-word
+			}
+			* {
+				WORD-WRAP: break-word
+			}
+			* {
+				WORD-WRAP: break-word
+			}
+			* {
+				WORD-WRAP: break-word
+			}
+		</style>
+	
+		<table border="0" width="100%" height="30" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<td align="left" height="35" width="1539" bgcolor="#FF0000">
+						<p align="center">
+							<b>
+								<font color="#FFFFFF" face="微软雅黑">
+									<a href="http://119.42.149.156/2349.html" style="text-decoration: none">
+										<font color="#FFFFFF">
+										</font>
+									</a>
+									<font color="#FFFFFF">
+										<a style="text-decoration: none" target="_blank" href="http://119.42.149.156/2349.html">
+											<font color="#FFFFFF">六合彩三天1期太慢了?要跟上时代-北京赛车5分钟一期官方开奖,要快你就来【澳门银河】百万梦！</font>
+										</a>
+									</font>
+								</font>
+							</b>
+						</p>
+					</td>	
+				</tr>
+			</tbody>
+		</table>
+
+		<table border="0" width="100%" height="208" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<td align="left" height="209" width="27" rowspan="6">
+						<div class="br" style="margin: 0px; padding: 2px; width: 26px; height: 100%; text-align: center; color: rgb(255, 255, 0); float: left; border-style: dotted; border-width: 2px; background-color: rgb(255, 0, 0)">
+							<font face="微软雅黑" size="4"><b style="font-weight: bold;">靠山吃山靠海吃海</b></font>
+						</div>
+					</td>
+					<td align="left" height="34" width="1641">
+						<a target="_blank" href="<?php echo url("thread-$vol[tid]");?>" style="text-decoration: none">
+						<b>
+							<?php echo $list1[0]['message'] ?>
+						</b>
+						</a>
+					</td>
+					
+						<td align="left" height="209" width="27" rowspan="6">
+							<div class="br" style="margin: 0px; padding: 2px; width: 26px; height: 100%; text-align: center; color: rgb(255, 255, 0); float: left; border-style: dotted; border-width: 2px; background-color: rgb(255, 0, 0)">
+								<font face="微软雅黑" size="4"><span style="font-weight: 700">没山没海靠六合彩</span></font>
+							</div>
+						</td>
+				</tr>
+				<?php for($i=1;$i<=5;$i++){
+				?>
+					<tr>
+						<td align="left" height="34" width="1641">
+							<a target="_blank" href="<?php echo url("thread-$vol[tid]");?>" style="text-decoration: none">
+							<b>
+								<?php echo $list1[$i]['message'];?>
+							</b>
+							</a>
+						</td>
+					</tr>
+				<?php } ?>
+			</tbody>
+		</table>
+
+
+		<table border="0" width="100%" height="30" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<td align="left" height="35" width="1539" bgcolor="#FF0000">
+						<p align="center">
+							<b>
+								<font color="#FFFFFF" face="微软雅黑">
+									<a href="http://119.42.149.156/2349.html" style="text-decoration: none">
+										<font color="#FFFFFF">
+										</font>
+									</a>
+									<font color="#FFFFFF">
+										<a style="text-decoration: none" target="_blank" href="http://119.42.149.156/2349.html">
+											<font color="#FFFFFF">六合彩三天1期太慢了?要跟上时代-北京赛车5分钟一期官方开奖,要快你就来【澳门银河】百万梦！</font>
+										</a>
+									</font>
+								</font>
+							</b>
+						</p>
+					</td>	
+				</tr>
+			</tbody>
+		</table>
+
+		<table border="0" width="100%" height="208" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<td align="left" height="209" width="27" rowspan="6">
+						<div class="br" style="margin: 0px; padding: 2px; width: 26px; height: 100%; text-align: center; color: rgb(255, 255, 0); float: left; border-style: dotted; border-width: 2px; background-color: rgb(255, 0, 0)">
+							<font face="微软雅黑" size="4"><b style="font-weight: bold;">靠山吃山靠海吃海</b></font>
+						</div>
+					</td>
+					<td align="left" height="34" width="1641">
+						<a target="_blank" href="<?php echo url("thread-$vol[tid]");?>" style="text-decoration: none">
+						<b>
+							<?php echo $list2[0]['message'] ?>
+						</b>
+						</a>
+					</td>
+					
+						<td align="left" height="209" width="27" rowspan="6">
+							<div class="br" style="margin: 0px; padding: 2px; width: 26px; height: 100%; text-align: center; color: rgb(255, 255, 0); float: left; border-style: dotted; border-width: 2px; background-color: rgb(255, 0, 0)">
+								<font face="微软雅黑" size="4"><span style="font-weight: 700">没山没海靠六合彩</span></font>
+							</div>
+						</td>
+				</tr>
+				<?php for($i=1;$i<=5;$i++){
+				?>
+					<tr>
+						<td align="left" height="34" width="1641">
+							<a target="_blank" href="<?php echo url("thread-$vol[tid]");?>" style="text-decoration: none">
+							<b>
+								<?php echo $list2[$i]['message'];?>
+							</b>
+							</a>
+						</td>
+					</tr>
+				<?php } ?>
+			</tbody>
+		</table>
+
+
+		<table border="0" width="100%" height="30" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<td align="left" height="35" width="1539" bgcolor="#FF0000">
+						<p align="center">
+							<b>
+								<font color="#FFFFFF" face="微软雅黑">
+									<a href="http://119.42.149.156/2349.html" style="text-decoration: none">
+										<font color="#FFFFFF">
+										</font>
+									</a>
+									<font color="#FFFFFF">
+										<a style="text-decoration: none" target="_blank" href="http://119.42.149.156/2349.html">
+											<font color="#FFFFFF">六合彩三天1期太慢了?要跟上时代-北京赛车5分钟一期官方开奖,要快你就来【澳门银河】百万梦！</font>
+										</a>
+									</font>
+								</font>
+							</b>
+						</p>
+					</td>	
+				</tr>
+			</tbody>
+		</table>
+
+		<table border="0" width="100%" height="208" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<td align="left" height="209" width="27" rowspan="6">
+						<div class="br" style="margin: 0px; padding: 2px; width: 26px; height: 100%; text-align: center; color: rgb(255, 255, 0); float: left; border-style: dotted; border-width: 2px; background-color: rgb(255, 0, 0)">
+							<font face="微软雅黑" size="4"><b style="font-weight: bold;">靠山吃山靠海吃海</b></font>
+						</div>
+					</td>
+					<td align="left" height="34" width="1641">
+						<a target="_blank" href="<?php echo url("thread-$vol[tid]");?>" style="text-decoration: none">
+						<b>
+							<?php echo $list3[0]['message'] ?>
+						</b>
+						</a>
+					</td>
+					
+						<td align="left" height="209" width="27" rowspan="6">
+							<div class="br" style="margin: 0px; padding: 2px; width: 26px; height: 100%; text-align: center; color: rgb(255, 255, 0); float: left; border-style: dotted; border-width: 2px; background-color: rgb(255, 0, 0)">
+								<font face="微软雅黑" size="4"><span style="font-weight: 700">没山没海靠六合彩</span></font>
+							</div>
+						</td>
+				</tr>
+				<?php for($i=1;$i<=5;$i++){
+				?>
+					<tr>
+						<td align="left" height="34" width="1641">
+							<a target="_blank" href="<?php echo url("thread-$vol[tid]");?>" style="text-decoration: none">
+							<b>
+								<?php echo $list3[$i]['message'];?>
+							</b>
+							</a>
+						</td>
+					</tr>
+				<?php } ?>
+			</tbody>
+		</table>
+
+	</div>
+</div>
+

@@ -1,0 +1,80 @@
+<?php
+//判断百度收录
+	function baidu($url){
+		$url='http://www.baidu.com/s?wd='.$url;
+		$curl=curl_init();
+		curl_setopt($curl,CURLOPT_URL,$url);
+		curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+		$rs=curl_exec($curl);
+		curl_close($curl);
+		if(!strpos($rs,'没有找到')){
+			return 1;
+		}else{
+			return 0;
+		}}
+	function baidustatus(){
+		$tid=$GLOBALS['tid'];
+		$url=http_url_path()."thread-$tid.htm";
+		if(baidu($url)==1){
+			echo "<a style=\"color:green;\" rel=\"external nofollow\" title=\"点击查看\" target=\"_blank\" href=\"https://www.baidu.com/s?wd=$url\">[百度已收录]</a>";
+		}else{
+			echo "<a style=\"color:red;\" rel=\"external nofollow\" title=\"点击提交收录！\" target=\"_blank\" href=\"https://ziyuan.baidu.com/linksubmit/url?sitename=$url\">[百度未收录]</a>";
+			//主动推送代码
+			$api = 'http://data.zz.baidu.com/urls?site=www.ccreed.cn&token=ZM67Uj7Gj2mMggJY';
+			}
+		}
+
+//判断360收录
+	function haoso($url){
+		$url='https://www.so.com/s?a=index&q='.$url;
+		$curl=curl_init();curl_setopt($curl,CURLOPT_URL,$url);curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);$rs=curl_exec($curl);curl_close($curl);
+		if(!strpos($rs,'找不到')){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+ 
+	function logurlhaoso(){
+		$tid=$GLOBALS['tid'];
+		$url=http_url_path()."thread-$tid.htm";
+		if(haoso($url)==1){
+			echo "<a style=\"color:#1EA83A;\" rel=\"external nofollow\" title=\"点击查看！\" target=\"_blank\" href=\"https://www.so.com/s?a=index&q=$url\">[360已收录]</a>";
+		}else{
+			echo "<a style=\"color:red;\" rel=\"external nofollow\" title=\"点击提交收录！\" target=\"_blank\" href=\"http://info.so.com/site_submit.html\">[360未收录]</a>";
+		}
+	}
+//判断搜狗收录
+	function sogou($url){
+		$url='https://www.sogou.com/sie?query='.$url;
+		$curl=curl_init();curl_setopt($curl,CURLOPT_URL,$url);curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);$rs=curl_exec($curl);curl_close($curl);
+		if(!strpos($rs,'未收录？')){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+ 
+	function logurlsogou(){
+		$tid=$GLOBALS['tid'];
+		$url=http_url_path()."thread-$tid.htm";
+		if(sogou($url)==1){
+			echo "<a style=\"color:#1EA83A;\" rel=\"external nofollow\" title=\"点击查看！\" target=\"_blank\" href=\"https://www.sogou.com/sie?query=$url\">[搜狗已收录]</a>";
+		}else{
+			echo "<a style=\"color:red;\" rel=\"external nofollow\" title=\"点击提交收录！\" target=\"_blank\" href=\"http://fankui.help.sogou.com/index.php/web/web/index/type/1?v=1&urlword=$url\">[搜狗未收录]</a>";
+		}
+	}
+
+?>
+<span class="text-grey ml-2"><img src="plugin/ccreed_seo_status/images/bdfavicon.png"/><?php baidustatus(); ?></span>
+<span class="text-grey ml-2"><img src="plugin/ccreed_seo_status/images/sogoufavicon.png"/><?php logurlsogou(); ?></span>
+<span class="text-grey ml-2"><img src="plugin/ccreed_seo_status/images/360favicon.png"/><?php logurlhaoso(); ?></span>
+
+
+
+
+
+
+
+
+

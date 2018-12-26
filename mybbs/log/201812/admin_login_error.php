@@ -1,0 +1,12 @@
+<?php exit;?>	2018-12-19 22:05:28	127.0.0.1	/admin/?other-cache.htm	1	password error. uid:1 - ******
+<?php exit;?>	2018-12-19 22:05:30	127.0.0.1	/admin/?other-cache.htm	1	password error. uid:1 - ******
+<?php exit;?>	2018-12-19 22:05:31	127.0.0.1	/admin/?other-cache.htm	1	password error. uid:1 - ******
+<?php exit;?>	2018-12-19 22:05:31	127.0.0.1	/admin/?other-cache.htm	1	password error. uid:1 - ******
+<?php exit;?>	2018-12-19 22:05:32	127.0.0.1	/admin/?other-cache.htm	1	password error. uid:1 - ******
+<?php exit;?>	2018-12-19 22:05:32	127.0.0.1	/admin/?other-cache.htm	1	password error. uid:1 - ******
+<?php exit;?>	2018-12-21 21:58:45	127.0.0.1	/admin/other-cache.htm	1	password error. uid:1 - ******
+<?php exit;?>	2018-12-21 21:58:46	127.0.0.1	/admin/other-cache.htm	1	password error. uid:1 - ******
+<?php exit;?>	2018-12-21 21:58:47	127.0.0.1	/admin/other-cache.htm	1	password error. uid:1 - ******
+<?php exit;?>	2018-12-24 13:21:26	127.0.0.1	/admin/other-cache.htm	1	password error. uid:1 - ******
+<?php exit;?>	2018-12-24 13:21:27	127.0.0.1	/admin/other-cache.htm	1	password error. uid:1 - ******
+<?php exit;?>	2018-12-24 13:21:28	127.0.0.1	/admin/other-cache.htm	1	password error. uid:1 - ******

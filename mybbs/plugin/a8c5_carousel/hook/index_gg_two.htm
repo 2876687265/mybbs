@@ -1,0 +1,25 @@
+<?php
+$slidelist = db_find('slide', array('weizhi'=>3), array('rank'=>-1), 1, 1000, 'slideid');
+?>
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+	<div class="box">
+		<div class="adbox">
+			<table width="100%" cellspacing="0" cellpadding="0" data-sort="sortDisabled" id="table3">
+				<tbody>
+					<?php if(!empty($slidelist)){ ?>
+						<?php foreach($slidelist as $key=>$val){ ?>
+							<tr>
+								<td bgcolor="#FFFFFF" style="margin: 0px; padding: 3px 2px; border-color: rgb(209, 209, 209); word-break: break-all;">
+									<a <?php if(empty($val['url'])){ ?> target="_blank" href="<?php echo $val['url'] ?>" <?php } ?> >
+										<img border="0" src="<?php echo $val['picurl'] ?>" width="100%" height="<?php echo $val['picheight'] ?>">
+									</a>
+								</td>
+							</tr>
+						<?php  }?>
+					<?php  }?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="mb-3"></div>

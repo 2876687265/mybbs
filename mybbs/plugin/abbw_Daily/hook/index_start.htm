@@ -1,0 +1,12 @@
+<?php
+date_default_timezone_set('PRC');
+$Set_date = date('YYYY-MM-DD');
+$Get_TXT=file_get_contents('http://open.iciba.com/dsapi/?date='.$Set_date);
+$TXT=json_decode($Get_TXT,true);
+?>
+
+<div class="card-header">
+<span class="table table-hover threadlist">每日一句：<?php echo $TXT['content'];?></span>
+<span class="table table-hover threadlist"><?php echo $TXT['note'];?></span>
+</div>
+

@@ -1,0 +1,10 @@
+{
+    "name": "内部正版插件",
+    "brief": "1、可后台添加图片地址，链接及名称<br> 2、数量可无限添加，建议不要太多！<br>",
+    "version": "1.0",
+    "bbs_version": "4.0.4",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "dependencies": []
+}
